@@ -1,0 +1,54 @@
+.form{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin: 1rem;
+  
+}
+.form-group input{
+    border-right: none;
+    border-top:none;
+    border-left:none;
+    outline: none;
+    }
+
+   
+.navbar{
+    background:rgb(111, 0, 255);
+    padding: 1rem;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+.navbar h4{
+    color: #fff;
+    margin-left:0.75rem;
+}
+
+.tabs .tab{
+margin:0 auto;
+padding-top:1rem;
+}
+    
+
+.form-select{
+    border-right: none;
+    border-left: none;
+    border-top:none;
+    opacity: 0.6;
+    margin-top:0.85rem;
+}
+
+#addUser{
+    float: right;
+}
+.goToHomePage{
+    color:#fff;
+}
+.goToHomePage:hover{
+    color:rgb(223, 230, 237);
+    text-decoration: none;
+    
+}
+
+.backIcon{
+    transform: rotateY(180deg);
+    margin-right: 0.7rem;
+}
