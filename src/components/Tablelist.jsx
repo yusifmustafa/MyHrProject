@@ -1,33 +1,13 @@
-import React, { useState } from "react";
 import "./Tablelist.css";
 import { Link } from "react-router-dom";
-import { FaPen } from "react-icons/fa";
-export const ADD_USER = "ADD_USER";
-export const EDIT_PERSON = "EDIT_PERSON";
-
+import { FaPen, FaTrash } from "react-icons/fa";
 
 function Tablelist() {
-  const onChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleOnClick = (e) => {
-    const { action, data } = e;
-    if (action === ADD_USER) {
-      setForm({ userId: 0 });
-    } else if (action === EDIT_PERSON) {
-      setForm(data);
-      upsertPerson();
-    }
-  };
-
-  const [form, setForm] = useState({});
-
   const data = getDataFromLocalStorage();
   return (
     <div className="tablelist">
       <h3>İşçilərin siyahısı</h3>
-      <Link to="/Adduser" className="adduser">
+      <Link to="/add-user" className="adduser">
         Əlavə et
       </Link>
       <table className="table table-striped">
@@ -53,8 +33,18 @@ function Tablelist() {
                 <td>{item.department}</td>
                 <td>
                   <div className="edit-button">
-                    <button className="btn btn-success">
+                    <Link to={`/edit-user/${item.userId}`} className="adduser">
                       <FaPen />
+                    </Link>
+                  </div>
+                  <div className="delete-button">
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteItem(item.userId)}
+                    >
+                      <span className="trash-icon">
+                        <FaTrash />
+                      </span>
                     </button>
                   </div>
                 </td>
@@ -75,32 +65,10 @@ function Tablelist() {
     return data;
   }
 
-  function getMaxUserId() {
+  function deleteItem(userId) {
     let data = getDataFromLocalStorage();
-    let userId = 0;
-    (data ? data : []).forEach((item) => {
-      if (item.userId > userId) item.userId = userId;
-      return userId + 1;
-    });
-  }
-
-  function upsertPerson() {
-    let updateData = getDataFromLocalStorage();
-
-    if (form.userId === 0) {
-      form.userId = getMaxUserId(updateData);
-      updateData.push(form);
-      console.log("pushForm", form);
-    } else if (form.userId > 0) {
-      updateData = (updateData ? updateData : []).map((item) => {
-        if (item.userId === form.userId) return form;
-        else return item;
-      });
-    }
-
-    if (updateData && typeof updateData === "object") {
-      localStorage.setItem("data", JSON.stringify(updateData));
-    }
+    data = data.filter((item) => item.userId !== userId);
+    localStorage.setItem("data", JSON.stringify(data));
   }
 }
 

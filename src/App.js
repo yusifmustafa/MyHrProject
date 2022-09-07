@@ -4,10 +4,12 @@ import Adduser from "./components/Adduser";
 import Tablelist from "./components/Tablelist";
 function App() {
   return (
-      <Routes>
+    <Routes>
+      
         <Route path="/" element={<Tablelist />} />
-        <Route path="/Adduser" element={<Adduser />} />
-      </Routes>
+        <Route path="add-user" element={<Adduser />} />
+    
+    </Routes>
   );
 }
 
