@@ -1,9 +1,23 @@
 import "./Tablelist.css";
 import { Link } from "react-router-dom";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 function Tablelist() {
-  const data = getDataFromLocalStorage();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = () => {
+    const empList = getDataFromLocalStorage();
+    setData(empList);
+  };
+
+
+
+  
   return (
     <div className="tablelist">
       <h3>İşçilərin siyahısı</h3>
@@ -58,10 +72,7 @@ function Tablelist() {
 
   function getDataFromLocalStorage() {
     const dataString = localStorage.getItem("data");
-    console.log("dataString ", dataString);
-
     const data = dataString ? JSON.parse(dataString) : [];
-    console.log("data", data);
     return data;
   }
 
@@ -69,6 +80,7 @@ function Tablelist() {
     let data = getDataFromLocalStorage();
     data = data.filter((item) => item.userId !== userId);
     localStorage.setItem("data", JSON.stringify(data));
+    loadData();
   }
 }
 
