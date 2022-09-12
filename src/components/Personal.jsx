@@ -1,7 +1,9 @@
 import React from "react";
 import { ADD_USER } from "./Adduser";
+export const blockInvalidChar = (e) =>
+  ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
 
-function Personal({ userId, handleOnClick, onChange, form }) { 
+function Personal({ handleOnClick, onChange, form }) {
   return (
     <div>
       <div className="form">
@@ -57,7 +59,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <select
-          name="idcard"
+            name="idcard"
             className="form-select"
             aria-label="Default select example"
             onChange={onChange}
@@ -72,7 +74,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="passport"
+            name="passport"
             type="text"
             className="form-control"
             placeholder="Şəxsiyyət vəsiqəsi nömrəsi *"
@@ -82,7 +84,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="birthplace"
+            name="birthplace"
             type="text"
             className="form-control"
             placeholder="Doğum yeri "
@@ -92,8 +94,9 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="birthday"
+            name="birthday"
             type="date"
+            // onFocus={(this.type = "date")}
             className="form-control"
             placeholder="Doğum tarixi "
             onChange={onChange}
@@ -102,7 +105,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="fincode"
+            name="fincode"
             type="text"
             className="form-control"
             placeholder="Fin Kodu *"
@@ -112,7 +115,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <select
-          name='bloodgroup'
+            name="bloodgroup"
             className="form-select"
             aria-label="Default select example"
             onChange={onChange}
@@ -131,7 +134,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <select
-          name="maritalstatus"
+            name="maritalstatus"
             className="form-select"
             aria-label="Default select example"
             onChange={onChange}
@@ -144,7 +147,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <select
-          name="gender"
+            name="gender"
             className="form-select"
             aria-label="Default select example"
             onChange={onChange}
@@ -157,7 +160,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="citizenship"
+            name="citizenship"
             type="text"
             className="form-control"
             placeholder="Vətəndaşlığı *"
@@ -167,7 +170,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="registerationaddress"
+            name="registerationaddress"
             type="text"
             className="form-control"
             placeholder="Qeydiyyat ünvanı *"
@@ -177,7 +180,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="address"
+            name="address"
             type="text"
             className="form-control"
             placeholder="Faktiki yaşadığı ünvan "
@@ -187,7 +190,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <select
-          name="docorganization"
+            name="docorganization"
             className="form-select"
             aria-label="Default select example"
             onChange={onChange}
@@ -201,27 +204,27 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="docstartdate"
+            name="docstart"
             type="date"
             className="form-control"
             placeholder="ŞV verilmə tarixi "
             onChange={onChange}
-            value={form.docstartdate}
+            value={form.docstart}
           />
         </div>
         <div className="form-group">
           <input
-          name="docenddate"
+            name="docend"
             type="date"
             className="form-control"
             placeholder="ŞV bitmə tarixi "
             onChange={onChange}
-            value={form.docenddate}
+            value={form.docend}
           />
         </div>
         <div className="form-group">
           <select
-          name="militarystatus"
+            name="militarystatus"
             className="form-select"
             aria-label="Default select example"
             onChange={onChange}
@@ -234,17 +237,19 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="dsmfcardnumber"
+            name="dsmfcardnumber"
             type="number"
+            min="0"
             className="form-control"
             placeholder="DSMF Kart nömrəsi "
             onChange={onChange}
             value={form.dsmfcardnumber}
+            onKeyDown={blockInvalidChar}
           />
         </div>
         <div className="form-group">
           <input
-          name="quotastatus"
+            name="quotastatus"
             type="text"
             className="form-control"
             placeholder="Kvota status"
@@ -254,7 +259,7 @@ function Personal({ userId, handleOnClick, onChange, form }) {
         </div>
         <div className="form-group">
           <input
-          name="graduation"
+            name="graduation"
             type="text"
             className="form-control"
             placeholder="Xüsusi məzuniyyət statusu"

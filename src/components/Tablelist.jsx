@@ -5,25 +5,31 @@ import { useEffect, useState } from "react";
 
 function Tablelist() {
   const [data, setData] = useState([]);
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = () => {
-    const empList = getDataFromLocalStorage();
-    setData(empList);
+  const [searchTab, setSearchTab] = useState("");
+  const uptData = () => {
+    const empData = getDataFromLocalStorage();
+    setData(empData);
   };
 
+  useEffect(() => {
+    uptData();
+  }, []);
 
 
-  
   return (
     <div className="tablelist">
-      <h3>İşçilərin siyahısı</h3>
+      <h3>İşçilərin siyahısı</h3> <br />
       <Link to="/add-user" className="adduser">
         Əlavə et
       </Link>
+      <input
+        type="search"
+        name="search"
+        placeholder="Axtar..."
+        className="form-control"
+        onChange={(e) => setSearchTab(e.target.value)}
+        style={{ width: "150px", height: "40px" }}
+      />
       <table className="table table-striped">
         <thead>
           <tr className="user-about">
@@ -36,35 +42,42 @@ function Tablelist() {
           </tr>
         </thead>
         <tbody>
-          {(data ? data : []).map((item) => {
-            return (
-              <tr key={item.userId}>
-                <td>{item.userId}</td>
-                <td>{item.name}</td>
-                <td>{item.surname}</td>
-                <td>{item.fathername}</td>
-                <td>{item.username}</td>
-                <td>{item.department}</td>
-                <td>
-                  <div className="edit-button">
-                    <Link to={`/edit-user/${item.userId}`} className="adduser">
-                      <FaPen />
-                    </Link>
-                  </div>
-                  <div className="delete-button">
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => deleteItem(item.userId)}
-                    >
-                      <span className="trash-icon">
-                        <FaTrash />
-                      </span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
+          {(data ? data : [])
+
+            .filter((item) => item.name?.includes(searchTab))
+
+            .map((item) => {
+              return (
+                <tr key={item.userId}>
+                  <td>{item.userId}</td>
+                  <td>{item.name}</td>
+                  <td>{item.surname}</td>
+                  <td>{item.fathername}</td>
+                  <td>{item.username}</td>
+                  <td>{item.department}</td>
+                  <td>
+                    <div className="edit-button">
+                      <Link
+                        to={`/edit-user/${item.userId}`}
+                        className="adduser"
+                      >
+                        <FaPen />
+                      </Link>
+                    </div>
+                    <div className="delete-button">
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteItem(item.userId)}
+                      >
+                        <span className="trash-icon">
+                          <FaTrash />
+                        </span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
@@ -80,7 +93,7 @@ function Tablelist() {
     let data = getDataFromLocalStorage();
     data = data.filter((item) => item.userId !== userId);
     localStorage.setItem("data", JSON.stringify(data));
-    loadData();
+    uptData();
   }
 }
 
