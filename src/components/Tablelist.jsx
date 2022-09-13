@@ -1,9 +1,12 @@
 import "./Tablelist.css";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 import { FaPen, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 function Tablelist() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [employeesPerPage, setEmployeesPerPage] = useState(10);
   const [data, setData] = useState([]);
   const [searchTab, setSearchTab] = useState("");
   const uptData = () => {
@@ -15,6 +18,14 @@ function Tablelist() {
     uptData();
   }, []);
 
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = data.slice(
+    indexOfFirstEmployee,
+    indexOfLastEmployee
+  );
+  const totalPages = Math.ceil(data.length / employeesPerPage);
 
   return (
     <div className="tablelist">
@@ -42,7 +53,7 @@ function Tablelist() {
           </tr>
         </thead>
         <tbody>
-          {(data ? data : [])
+          {(currentEmployees ? currentEmployees : [])
 
             .filter((item) => item.name?.includes(searchTab))
 
@@ -80,6 +91,7 @@ function Tablelist() {
             })}
         </tbody>
       </table>
+      <Pagination totalPages={totalPages} setCurrentPage={setCurrentPage} />
     </div>
   );
 

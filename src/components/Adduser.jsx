@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const ADD_USER = "ADD_USER";
 function Adduser() {
   const [form, setForm] = useState({});
+  const [show, setShow] = useState(false);
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -18,16 +19,23 @@ function Adduser() {
   const handleOnClick = (e) => {
     const { action, data } = e;
     if (
-      form.name === "" ||
-      form.surname === "" ||
-      form.username === "" ||
-      form.fathername === ""
+      data.name === "" ||
+      data.name === undefined ||
+      data.surname === "" ||
+      data.surname === undefined ||
+      data.username === "" ||
+      data.username === undefined ||
+      data.fathername === "" ||
+      data.fathername === undefined
     ) {
-      alert("error");
+      setShow(true);
+
+      setTimeout(() => {
+        setShow("");
+      }, 2000);
       return;
     }
     if (action === ADD_USER) {
-
       data.userId = userId !== undefined ? userId : 0;
       setForm(data);
       upsertPerson();
@@ -44,6 +52,7 @@ function Adduser() {
     setValue(newValue);
   };
 
+ 
   return (
     <div>
       <div className="navbar">
@@ -74,6 +83,8 @@ function Adduser() {
               onChange={onChange}
               handleOnClick={handleOnClick}
               form={form}
+              show={show}
+              setShow={setShow}
             />
           </TabPanel>
           <TabPanel value="2">

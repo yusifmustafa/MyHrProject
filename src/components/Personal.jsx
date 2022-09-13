@@ -3,7 +3,8 @@ import { ADD_USER } from "./Adduser";
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
 
-function Personal({ handleOnClick, onChange, form }) {
+function Personal({ handleOnClick, onChange, form, show }) {
+  console.log("show", show);
   return (
     <div>
       <div className="form">
@@ -280,6 +281,15 @@ function Personal({ handleOnClick, onChange, form }) {
       >
         ƏLAVƏ ET
       </button>
+      {show && (
+        <div
+          className="alert alert-danger"
+          role="alert"
+          style={{ width: "250px", margin: "0 auto" }}
+        >
+          Xanalar boş buraxıla bilməz!
+        </div>
+      )}
     </div>
   );
 }
