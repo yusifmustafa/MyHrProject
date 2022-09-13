@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ADD_USER } from "./Adduser";
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
 
-function Personal({ handleOnClick, onChange, form, show }) {
+function Personal({ handleOnClick, onChange, form, show}) {
+  
+  
   console.log("show", show);
   return (
     <div>
@@ -271,7 +274,8 @@ function Personal({ handleOnClick, onChange, form, show }) {
       </div>
       <button
         onClick={() =>
-          handleOnClick({
+          handleOnClick(
+            {
             action: ADD_USER,
             data: form,
           })

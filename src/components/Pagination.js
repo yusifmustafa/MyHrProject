@@ -35,6 +35,7 @@ function Pagination({ totalPages, setCurrentPage }) {
         {numOfPages.map((page, key) => {
           return (
             <li
+              key={key}
               className={`${
                 currentButton === page ? "page-item active" : "page-item"
               }`}

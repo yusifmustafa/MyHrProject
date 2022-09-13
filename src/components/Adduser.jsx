@@ -5,11 +5,15 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Personal from "./Personal";
 import Department from "./Department";
 import Education from "./Education";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 export const ADD_USER = "ADD_USER";
 function Adduser() {
+  const navigate = useNavigate();
+  const navigateToHomePage = () => {
+    navigate("/");
+  };
   const [form, setForm] = useState({});
   const [show, setShow] = useState(false);
   const onChange = (e) => {
@@ -39,6 +43,7 @@ function Adduser() {
       data.userId = userId !== undefined ? userId : 0;
       setForm(data);
       upsertPerson();
+      navigateToHomePage();
     }
   };
   const [value, setValue] = useState("1");
@@ -52,7 +57,6 @@ function Adduser() {
     setValue(newValue);
   };
 
- 
   return (
     <div>
       <div className="navbar">
@@ -84,7 +88,6 @@ function Adduser() {
               handleOnClick={handleOnClick}
               form={form}
               show={show}
-              setShow={setShow}
             />
           </TabPanel>
           <TabPanel value="2">
