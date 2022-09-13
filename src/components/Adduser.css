@@ -99,3 +99,8 @@ input:focus + label{
     -webkit-box-shadow: none;
     box-shadow: none;
   }
+
+  nav{
+    float:right;
+    margin: 1em;
+  }
