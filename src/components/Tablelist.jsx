@@ -9,7 +9,8 @@ function Tablelist() {
   const [employeesPerPage, setEmployeesPerPage] = useState(10);
   const [data, setData] = useState([]);
   const [searchTab, setSearchTab] = useState("");
-  const uptData = () => {
+  const 
+  uptData = () => {
     const empData = getDataFromLocalStorage();
     setData(empData);
   };

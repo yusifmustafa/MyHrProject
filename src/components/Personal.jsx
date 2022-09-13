@@ -1,12 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { DatePicker } from "@mui/lab";
+import React, { Fragment } from "react";
 import { ADD_USER } from "./Adduser";
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
 
-function Personal({ handleOnClick, onChange, form, show}) {
-  
-  
+function Personal({ handleOnClick, onChange, form, show }) {
   console.log("show", show);
   return (
     <div>
@@ -16,50 +14,50 @@ function Personal({ handleOnClick, onChange, form, show}) {
             name="surname"
             type="text"
             className="form-control"
-            placeholder="Soyadı *"
             onChange={onChange}
             value={form.surname}
           />
+          <label>Soyad *</label>
         </div>
         <div className="form-group">
           <input
             name="name"
             type="text"
             className="form-control"
-            placeholder="Adı *"
             onChange={onChange}
             value={form.name}
           />
+          <label>Adı *</label>
         </div>
         <div className="form-group">
           <input
             name="fathername"
             type="text"
             className="form-control"
-            placeholder="Ata Adı *"
             value={form.fathername}
             onChange={onChange}
           />
+          <label>Ata Adı *</label>
         </div>
         <div className="form-group">
           <input
             name="username"
             type="text"
             className="form-control"
-            placeholder="İstifadəçi Adı *"
             value={form.username}
             onChange={onChange}
           />
+          <label>İstifadəçi Adı *</label>
         </div>
         <div className="form-group">
           <input
             name="1ckod"
             type="text"
             className="form-control"
-            placeholder="1C Kodu *"
             value={form.code}
             onChange={onChange}
           />
+          <label>1C Kodu *</label>
         </div>
         <div className="form-group">
           <select
@@ -81,28 +79,28 @@ function Personal({ handleOnClick, onChange, form, show}) {
             name="passport"
             type="text"
             className="form-control"
-            placeholder="Şəxsiyyət vəsiqəsi nömrəsi *"
             onChange={onChange}
             value={form.passport}
           />
+          <label>Şəxsiyyət vəsiqəsi nömrəsi *</label>
         </div>
         <div className="form-group">
           <input
             name="birthplace"
             type="text"
             className="form-control"
-            placeholder="Doğum yeri "
             onChange={onChange}
             value={form.birthplace}
           />
+          <label>Doğum yeri</label>
         </div>
         <div className="form-group">
           <input
             name="birthday"
             type="date"
+            placeholder="Doğum tarixi"
             // onFocus={(this.type = "date")}
             className="form-control"
-            placeholder="Doğum tarixi "
             onChange={onChange}
             value={form.birthday}
           />
@@ -112,10 +110,10 @@ function Personal({ handleOnClick, onChange, form, show}) {
             name="fincode"
             type="text"
             className="form-control"
-            placeholder="Fin Kodu *"
             onChange={onChange}
             value={form.fincode}
           />
+          <label>Fin Kodu *</label>
         </div>
         <div className="form-group">
           <select
@@ -167,30 +165,30 @@ function Personal({ handleOnClick, onChange, form, show}) {
             name="citizenship"
             type="text"
             className="form-control"
-            placeholder="Vətəndaşlığı *"
             onChange={onChange}
             value={form.citizenship}
           />
+          <label>Vətəndaşlığı *</label>
         </div>
         <div className="form-group">
           <input
             name="registerationaddress"
             type="text"
             className="form-control"
-            placeholder="Qeydiyyat ünvanı *"
             onChange={onChange}
             value={form.registerationaddress}
           />
+          <label>Qeydiyyat ünvanı *</label>
         </div>
         <div className="form-group">
           <input
             name="address"
             type="text"
             className="form-control"
-            placeholder="Faktiki yaşadığı ünvan "
             onChange={onChange}
             value={form.address}
           />
+          <label>Faktiki yaşadığı ünvan</label>
         </div>
         <div className="form-group">
           <select
@@ -207,11 +205,12 @@ function Personal({ handleOnClick, onChange, form, show}) {
           </select>
         </div>
         <div className="form-group">
+        
           <input
             name="docstart"
             type="date"
+            placeholder="ŞV verilmə tarixi"
             className="form-control"
-            placeholder="ŞV verilmə tarixi "
             onChange={onChange}
             value={form.docstart}
           />
@@ -245,37 +244,36 @@ function Personal({ handleOnClick, onChange, form, show}) {
             type="number"
             min="0"
             className="form-control"
-            placeholder="DSMF Kart nömrəsi "
             onChange={onChange}
             value={form.dsmfcardnumber}
             onKeyDown={blockInvalidChar}
           />
+          <label>DSMF Kart nömrəsi</label>
         </div>
         <div className="form-group">
           <input
             name="quotastatus"
             type="text"
             className="form-control"
-            placeholder="Kvota status"
             onChange={onChange}
             value={form.quotastatus}
           />
+          <label>Kvota status</label>
         </div>
         <div className="form-group">
           <input
             name="graduation"
             type="text"
             className="form-control"
-            placeholder="Xüsusi məzuniyyət statusu"
             onChange={onChange}
             value={form.graduation}
           />
+          <label>Xüsusi məzuniyyət statusu</label>
         </div>
       </div>
       <button
         onClick={() =>
-          handleOnClick(
-            {
+          handleOnClick({
             action: ADD_USER,
             data: form,
           })
