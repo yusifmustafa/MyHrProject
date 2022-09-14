@@ -3,7 +3,7 @@ import "./Adduser.css";
 import { Tab, Box } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Personal from "./Personal";
-import Department from "./Department";
+import Department from "./Position";
 import Education from "./Education";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
@@ -17,6 +17,7 @@ function Adduser() {
   const [form, setForm] = useState({});
   const [show, setShow] = useState(false);
   const onChange = (e) => {
+    console.log("salam",e);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 

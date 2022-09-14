@@ -1,5 +1,7 @@
 import { DatePicker } from "@mui/lab";
+import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { Fragment } from "react";
+import { FormControl } from "@mui/material";
 import { ADD_USER } from "./Adduser";
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
@@ -10,265 +12,299 @@ function Personal({ handleOnClick, onChange, form, show }) {
     <div>
       <div className="form">
         <div className="form-group">
-          <input
+          <TextField
             name="surname"
             type="text"
-            className="form-control"
+            label="Soyad *"
+            variant="standard"
             onChange={onChange}
             value={form.surname}
           />
-          <label>Soyad *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="name"
             type="text"
-            className="form-control"
+            label="Adı *"
+            variant="standard"
             onChange={onChange}
             value={form.name}
           />
-          <label>Adı *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="fathername"
             type="text"
-            className="form-control"
+            label="Ata Adı *"
+            variant="standard"
             value={form.fathername}
             onChange={onChange}
           />
-          <label>Ata Adı *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="username"
+            label="İstifadəçi Adı *"
+            variant="standard"
             type="text"
-            className="form-control"
             value={form.username}
             onChange={onChange}
           />
-          <label>İstifadəçi Adı *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="1ckod"
             type="text"
-            className="form-control"
+            variant="standard"
+            label="1C Kodu *"
             value={form.code}
             onChange={onChange}
           />
-          <label>1C Kodu *</label>
         </div>
-        <div className="form-group">
-          <select
+        <FormControl style={{ width: "250px" }}>
+          <InputLabel id="demo-simple-select-label">
+            Vətəndaşlığı təsdiq edən sənəd
+          </InputLabel>
+
+          <Select
             name="idcard"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={onChange}
             value={form.idcard}
+            label="Vətəndaşlığı təsdiq edən sənəd"
+            onChange={onChange}
+            variant="standard"
           >
-            <option>Vətəndaşlığı təsdiq edən sənəd</option>
-            <option>Şəxsiyyət vəsiqəsi</option>
-            <option>Pasport</option>
-            <option>Müvəqqəti Yaşamaq İcazəsi</option>
-            <option>İş İcazəsi</option>
-          </select>
-        </div>
+            <MenuItem value="Şəxsiyyət vəsiqəsi">Şəxsiyyət vəsiqəsi</MenuItem>
+            <MenuItem value="Pasport">Pasport</MenuItem>
+            <MenuItem value="Müvəqqəti Yaşamaq İcazəsi">
+              Müvəqqəti Yaşamaq İcazəsi
+            </MenuItem>
+            <MenuItem value="İş İcazəsi">İş İcazəsi</MenuItem>
+          </Select>
+        </FormControl>
         <div className="form-group">
-          <input
+          <TextField
             name="passport"
+            label="Şəxsiyyət vəsiqəsi nömrəsi *"
+            variant="standard"
             type="text"
-            className="form-control"
             onChange={onChange}
             value={form.passport}
           />
-          <label>Şəxsiyyət vəsiqəsi nömrəsi *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="birthplace"
             type="text"
-            className="form-control"
+            label="Doğum yeri"
+            variant="standard"
             onChange={onChange}
             value={form.birthplace}
           />
-          <label>Doğum yeri</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="birthday"
+            label="Doğum tarixi"
             type="date"
-            placeholder="Doğum tarixi"
-            // onFocus={(this.type = "date")}
-            className="form-control"
+            defaultValue="2017-05-24"
+            sx={{ width: 200 }}
+            variant="standard"
             onChange={onChange}
             value={form.birthday}
           />
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="fincode"
+            label="Fin Kodu *"
+            variant="standard"
+            sx={{ width: 250 }}
             type="text"
-            className="form-control"
             onChange={onChange}
             value={form.fincode}
           />
-          <label>Fin Kodu *</label>
         </div>
         <div className="form-group">
-          <select
-            name="bloodgroup"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={onChange}
-            value={form.bloodgroup}
-          >
-            <option>Qan Qrupu</option>
-            <option value="1">I Qrup (0 RH +)</option>
-            <option value="2">I Qrup (0 RH -)</option>
-            <option value="3">II Qrup (A RH +)</option>
-            <option value="4">II Qrup (A RH -)</option>
-            <option value="5">III Qrup (B RH +)</option>
-            <option value="6">III Qrup (B RH -)</option>
-            <option value="7">IV Qrup (AB RH +)</option>
-            <option value="8">IV Qrup (AB RH -)</option>
-          </select>
+          <FormControl style={{ width: "250px" }}>
+            <InputLabel id="demo-simple-select-label">Qan Qrupu </InputLabel>
+
+            <Select
+              name="bloodgroup"
+              value={form.idcard}
+              label="Qan Qrupu"
+              onChange={onChange}
+              variant="standard"
+            >
+              <MenuItem value="I Qrup (0 RH +)">I Qrup (0 RH +)</MenuItem>
+              <MenuItem value="I Qrup (0 RH -)">I Qrup (0 RH -)</MenuItem>
+              <MenuItem value="II Qrup (A RH +)">II Qrup (A RH +) </MenuItem>
+              <MenuItem value="II Qrup (A RH -)">II Qrup (A RH -)</MenuItem>
+              <MenuItem value="III Qrup (B RH +)">III Qrup (B RH +)</MenuItem>
+              <MenuItem value="III Qrup (B RH -)">III Qrup (B RH -)</MenuItem>
+              <MenuItem value="IV Qrup (AB RH +)">IV Qrup (AB RH +)</MenuItem>
+              <MenuItem value="IV Qrup (AB RH -)">IV Qrup (AB RH -)</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className="form-group">
-          <select
-            name="maritalstatus"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={onChange}
-            value={form.maritalstatus}
-          >
-            <option>Ailə Vəziyyəti</option>
-            <option value="1">Evli</option>
-            <option value="2">Subay</option>
-          </select>
+          <FormControl style={{ width: "250px" }}>
+            <InputLabel id="demo-simple-select-label">
+              Ailə Vəziyyəti{" "}
+            </InputLabel>
+
+            <Select
+              name="maritalstatus"
+              value={form.maritalstatus}
+              label="Ailə Vəziyyəti"
+              onChange={onChange}
+              variant="standard"
+            >
+              <MenuItem value="Evli">Evli</MenuItem>
+              <MenuItem value="Subay">Subay</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className="form-group">
-          <select
-            name="gender"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={onChange}
-            value={form.gender}
-          >
-            <option>Cinsiyyəti</option>
-            <option value="1">Kişi</option>
-            <option value="2">Qadın</option>
-          </select>
+          <FormControl style={{ width: "250px" }}>
+            <InputLabel id="demo-simple-select-label">Cinsiyyəti </InputLabel>
+
+            <Select
+              name="gender"
+              value={form.gender}
+              label="Cinsiyyəti"
+              onChange={onChange}
+              variant="standard"
+            >
+              <MenuItem value="Kişi">Kişi</MenuItem>
+              <MenuItem value="Qadın">Qadın</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="citizenship"
+            label="Vətəndaşlığı *"
+            variant="standard"
+            sx={{ width: "250px" }}
             type="text"
-            className="form-control"
             onChange={onChange}
             value={form.citizenship}
           />
-          <label>Vətəndaşlığı *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="registerationaddress"
+            variant="standard"
+            label="Qeydiyyat ünvanı *"
             type="text"
-            className="form-control"
             onChange={onChange}
+            sx={{ width: "250px" }}
             value={form.registerationaddress}
           />
-          <label>Qeydiyyat ünvanı *</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="address"
+            variant="standard"
+            label="Faktiki yaşadığı ünvan"
             type="text"
-            className="form-control"
             onChange={onChange}
             value={form.address}
           />
-          <label>Faktiki yaşadığı ünvan</label>
         </div>
         <div className="form-group">
-          <select
-            name="docorganization"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={onChange}
-            value={form.docorganization}
-          >
-            <option>ŞV Verən Orqan</option>
-            <option value="1">Asan 1</option>
-            <option value="2">Asan 2</option>
-            <option value="2">Asan 3</option>
-          </select>
+          <FormControl style={{ width: "250px" }}>
+            <InputLabel id="demo-simple-select-label">
+              ŞV Verən Orqan{" "}
+            </InputLabel>
+
+            <Select
+              name="docorganization"
+              value={form.docorganization}
+              variant="standard"
+              label="ŞV Verən Orqan"
+              onChange={onChange}
+            >
+              <MenuItem value="Asan 1">Asan 1</MenuItem>
+              <MenuItem value="Asan 2">Asan 2</MenuItem>
+              <MenuItem value="Asan 3">Asan 3</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className="form-group">
-        
-          <input
+          <TextField
             name="docstart"
+            label="ŞV verilmə tarixi"
             type="date"
-            placeholder="ŞV verilmə tarixi"
-            className="form-control"
+            defaultValue="2017-05-24"
+            sx={{ width: 250 }}
+            variant="standard"
             onChange={onChange}
             value={form.docstart}
           />
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="docend"
             type="date"
-            className="form-control"
-            placeholder="ŞV bitmə tarixi "
+            label="ŞV bitmə tarixi"
+            variant="standard"
+            defaultValue="2017-05-24"
             onChange={onChange}
             value={form.docend}
           />
         </div>
         <div className="form-group">
-          <select
-            name="militarystatus"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={onChange}
-            value={form.militarystatus}
-          >
-            <option>Hərbi mükəlləfiyyəti</option>
-            <option value="1">H/M</option>
-            <option value="2">Yoxdur</option>
-          </select>
+          <FormControl style={{ width: "250px" }}>
+            <InputLabel id="demo-simple-select-label">
+              Hərbi mükəlləfiyyəti
+            </InputLabel>
+
+            <Select
+              name="militarystatus"
+              value={form.militarystatus}
+              variant="standard"
+              label="ŞV Verən Orqan"
+              onChange={onChange}
+            >
+              <MenuItem value="H/M">H/M</MenuItem>
+              <MenuItem value="Yoxdur">Yoxdur</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="dsmfcardnumber"
+            variant="standard"
+            label="DSMF Kart nömrəsi"
             type="number"
             min="0"
-            className="form-control"
             onChange={onChange}
             value={form.dsmfcardnumber}
             onKeyDown={blockInvalidChar}
           />
-          <label>DSMF Kart nömrəsi</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="quotastatus"
+            label="Kvota status"
+            variant="standard"
             type="text"
-            className="form-control"
+            sx={{width:"250px"}}
             onChange={onChange}
             value={form.quotastatus}
           />
-          <label>Kvota status</label>
         </div>
         <div className="form-group">
-          <input
+          <TextField
             name="graduation"
+            variant="standard"
+            sx={{width:"300px"}}
+            label="Xüsusi məzuniyyət statusu"
             type="text"
-            className="form-control"
             onChange={onChange}
             value={form.graduation}
           />
-          <label>Xüsusi məzuniyyət statusu</label>
         </div>
       </div>
       <button
