@@ -1,13 +1,12 @@
-import { DatePicker } from "@mui/lab";
 import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import React, { Fragment } from "react";
 import { FormControl } from "@mui/material";
 import { ADD_USER } from "./Adduser";
+import { Button } from "@mui/material";
+import { ToastContainer } from "react-toastify";
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
 
 function Personal({ handleOnClick, onChange, form, show }) {
-  console.log("show", show);
   return (
     <div>
       <div className="form">
@@ -290,7 +289,7 @@ function Personal({ handleOnClick, onChange, form, show }) {
             label="Kvota status"
             variant="standard"
             type="text"
-            sx={{width:"250px"}}
+            sx={{ width: "250px" }}
             onChange={onChange}
             value={form.quotastatus}
           />
@@ -299,7 +298,7 @@ function Personal({ handleOnClick, onChange, form, show }) {
           <TextField
             name="graduation"
             variant="standard"
-            sx={{width:"300px"}}
+            sx={{ width: "300px" }}
             label="Xüsusi məzuniyyət statusu"
             type="text"
             onChange={onChange}
@@ -307,7 +306,7 @@ function Personal({ handleOnClick, onChange, form, show }) {
           />
         </div>
       </div>
-      <button
+      <Button
         onClick={() =>
           handleOnClick({
             action: ADD_USER,
@@ -318,16 +317,8 @@ function Personal({ handleOnClick, onChange, form, show }) {
         id="addUser"
       >
         ƏLAVƏ ET
-      </button>
-      {show && (
-        <div
-          className="alert alert-danger"
-          role="alert"
-          style={{ width: "250px", margin: "0 auto" }}
-        >
-          Xanalar boş buraxıla bilməz!
-        </div>
-      )}
+      </Button>
+      <ToastContainer/>
     </div>
   );
 }

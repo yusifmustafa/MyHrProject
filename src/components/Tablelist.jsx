@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 import { FaPen, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { InputAdornment, TextField } from "@mui/material";
+import { FaSearch } from "react-icons/fa";
 
 function Tablelist() {
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage, setEmployeesPerPage] = useState(10);
   const [data, setData] = useState([]);
   const [searchTab, setSearchTab] = useState("");
-  const 
-  uptData = () => {
+  const uptData = () => {
     const empData = getDataFromLocalStorage();
     setData(empData);
   };
@@ -18,7 +19,6 @@ function Tablelist() {
   useEffect(() => {
     uptData();
   }, []);
-
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
@@ -34,10 +34,19 @@ function Tablelist() {
       <Link to="/add-user" className="adduser">
         Əlavə et
       </Link>
-      <input
+      <TextField
         type="search"
         name="search"
-        placeholder="Axtar..."
+        variant="standard"
+        label="Axtarış..."
+        sx={{ marginBottom: "2rem" }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="start">
+              <FaSearch />
+            </InputAdornment>
+          ),
+        }}
         className="form-control"
         onChange={(e) => setSearchTab(e.target.value)}
         style={{ width: "150px", height: "40px" }}

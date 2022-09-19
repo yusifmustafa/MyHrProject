@@ -7,17 +7,19 @@ import Department from "./Position";
 import Education from "./Education";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export const ADD_USER = "ADD_USER";
 function Adduser() {
+  const notify = () => toast.error("Xəta! Xanalar boş buraxıla bilməz");
+  const notify2 = () => toast.success("Əlavə edildi!");
   const navigate = useNavigate();
   const navigateToHomePage = () => {
     navigate("/");
   };
+
   const [form, setForm] = useState({});
-  const [show, setShow] = useState(false);
   const onChange = (e) => {
-    console.log("salam",e);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -33,18 +35,17 @@ function Adduser() {
       data.fathername === "" ||
       data.fathername === undefined
     ) {
-      setShow(true);
-
-      setTimeout(() => {
-        setShow("");
-      }, 2000);
+      notify();
       return;
     }
     if (action === ADD_USER) {
       data.userId = userId !== undefined ? userId : 0;
       setForm(data);
       upsertPerson();
-      navigateToHomePage();
+      setTimeout(() => {
+        navigateToHomePage();
+      }, 1500);
+      notify2();
     }
   };
   const [value, setValue] = useState("1");
@@ -88,7 +89,6 @@ function Adduser() {
               onChange={onChange}
               handleOnClick={handleOnClick}
               form={form}
-              show={show}
             />
           </TabPanel>
           <TabPanel value="2">
@@ -99,6 +99,7 @@ function Adduser() {
           </TabPanel>
         </TabContext>
       </div>
+      <ToastContainer />
     </div>
   );
 
