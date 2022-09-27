@@ -9,7 +9,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import API from "../Api";
 export const ADD_USER = "ADD_USER";
+
 function Adduser() {
   const notify = () => toast.error("Xəta! Xanalar boş buraxıla bilməz");
   const notify2 = () => toast.success("Əlavə edildi!");
@@ -32,16 +34,20 @@ function Adduser() {
       data.surname === undefined ||
       data.username === "" ||
       data.username === undefined ||
-      data.fathername === "" ||
-      data.fathername === undefined
+      data.patronymic === "" ||
+      data.patronymic === undefined
     ) {
       notify();
       return;
     }
     if (action === ADD_USER) {
-      data.userId = userId !== undefined ? userId : 0;
+      data.id = 0; 
+
+      if (userId !== undefined){
+        data.id = userId
+      } 
       setForm(data);
-      upsertPerson();
+      upsertPerson(data.id);
       setTimeout(() => {
         navigateToHomePage();
       }, 1500);
@@ -103,46 +109,58 @@ function Adduser() {
     </div>
   );
 
-  function getDataFromLocalStorage() {
-    const dataString = localStorage.getItem("data");
-    const data = dataString ? JSON.parse(dataString) : [];
-    return data;
+  // function getDataFromLocalStorage() {
+  //   const dataString = localStorage.getItem("data");
+  //   const data = dataString ? JSON.parse(dataString) : [];
+  //   return data;
+  // }
+
+  function upsertPerson(id) { 
+    if (id !== 0) {
+      API.put(`/employees/${userId}`, form).then((rsp) => {});
+    }
+     else if (id === 0) { 
+      API.post(`/employees`, form).then((rsp) => {});
+    }
   }
 
-  function upsertPerson() {
-    let updateData = getDataFromLocalStorage();
-    // form.userId = userId;
-    if (form.userId === 0) {
-      form.userId = getMaxUserId();
-      updateData.push(form);
-    } else if (form.userId > 0) {
-      updateData = (updateData ? updateData : []).map((item) => {
-        if (item.userId === form.userId) {
-          return form;
-        } else return item;
-      });
-    }
-    if (updateData && typeof updateData === "object") {
-      localStorage.setItem("data", JSON.stringify(updateData));
-    }
-  }
-  function getMaxUserId() {
-    const data = getDataFromLocalStorage();
-    let userId = 0;
-    (data ? data : []).forEach((item) => {
-      if (parseInt(item.userId) > userId) userId = parseInt(item.userId);
-    });
-    return (userId + 1).toString();
-  }
+  // let updateData = getDataFromLocalStorage();
+  // // form.userId = userId;
+  // if (form.userId === 0) {
+  //   form.userId = getMaxUserId();
+  //   updateData.push(form);
+  // } else if (form.userId > 0) {
+  //   updateData = (updateData ? updateData : []).map((item) => {
+  //     if (item.userId === form.userId) {
+  //       return form;
+  //     } else return item;
+  //   });
+  // }
+  // if (updateData && typeof updateData === "object") {
+  //   localStorage.setItem("data", JSON.stringify(updateData));
+  // }
+
+  // function getMaxUserId() {
+  //   const data = getDataFromLocalStorage();
+  //   let userId = 0;
+  //   (data ? data : []).forEach((item) => {
+  //     if (parseInt(item.userId) > userId) userId = parseInt(item.userId);
+  //   });
+  //   return (userId + 1).toString();
+  // }
 
   function getUserInfoById(userId) {
-    const data = getDataFromLocalStorage();
-    (data ? data : []).forEach((item) => {
-      if (parseInt(item.userId) === parseInt(userId)) {
-        setForm(item);
-      }
+    API.get(`/employees/${userId}`).then((rsp) => {
+      const response = rsp.data;
+      setForm(response);
     });
   }
+  // const data = getDataFromLocalStorage();
+  // (data ? data : []).forEach((item) => {
+  //   if (parseInt(item.userId) === parseInt(userId)) {
+  //     setForm(item);
+  //   }
+  // });
 }
 
 export default Adduser;

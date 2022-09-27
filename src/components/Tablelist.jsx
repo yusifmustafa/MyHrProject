@@ -5,20 +5,42 @@ import { FaPen, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { InputAdornment, TextField } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
+import API from "../Api";
 
 function Tablelist() {
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage, setEmployeesPerPage] = useState(10);
   const [data, setData] = useState([]);
   const [searchTab, setSearchTab] = useState("");
-  const uptData = () => {
-    const empData = getDataFromLocalStorage();
-    setData(empData);
-  };
+
+  function getDataFromAPI() {
+    API.get("/employees").then((rsp) => {
+        setData(rsp.data);
+    });
+  } 
+ 
+ 
+  // const uptData = () => {
+  //   const empData = getDataFromLocalStorage();
+  //   setData(empData);
+  // };
+
+  // axios
+  //   .get("http://localhost:8080/employees")
+  //   .then((res) => {
+  //     console.log("data", res);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
   useEffect(() => {
-    uptData();
+    getDataFromAPI();
   }, []);
+
+  // useEffect(() => {
+  //   uptData();
+  // }, []);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
@@ -26,6 +48,7 @@ function Tablelist() {
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
+  console.log("crntemploees", currentEmployees);
   const totalPages = Math.ceil(data.length / employeesPerPage);
 
   return (
@@ -68,27 +91,25 @@ function Tablelist() {
             .filter((item) => item.name?.includes(searchTab))
 
             .map((item) => {
+              console.log("item", item);
               return (
-                <tr key={item.userId}>
-                  <td>{item.userId}</td>
+                <tr key={item.id}>
+                  <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.surname}</td>
-                  <td>{item.fathername}</td>
+                  <td>{item.patronymic}</td>
                   <td>{item.username}</td>
                   <td>{item.department}</td>
                   <td>
                     <div className="edit-button">
-                      <Link
-                        to={`/edit-user/${item.userId}`}
-                        className="adduser"
-                      >
+                      <Link to={`/edit-user/${item.id}`} className="adduser">
                         <FaPen />
                       </Link>
                     </div>
                     <div className="delete-button">
                       <button
                         className="btn btn-danger"
-                        onClick={() => deleteItem(item.userId)}
+                        onClick={() => deleteItem(item.id)}
                       >
                         <span className="trash-icon">
                           <FaTrash />
@@ -105,17 +126,20 @@ function Tablelist() {
     </div>
   );
 
-  function getDataFromLocalStorage() {
-    const dataString = localStorage.getItem("data");
-    const data = dataString ? JSON.parse(dataString) : [];
-    return data;
-  }
+  // function getDataFromLocalStorage() {
+  //   const dataString = localStorage.getItem("data");
+  //   const data = dataString ? JSON.parse(dataString) : [];
+  //   return data;
+  // }
 
   function deleteItem(userId) {
-    let data = getDataFromLocalStorage();
-    data = data.filter((item) => item.userId !== userId);
-    localStorage.setItem("data", JSON.stringify(data));
-    uptData();
+    API.delete(`/employees/${userId}`).then(() => {
+      getDataFromAPI();
+    });
+    // let data = getDataFromLocalStorage();
+    // data = data.filter((item) => item.userId !== userId);
+    // localStorage.setItem("data", JSON.stringify(data));
+    // uptData();
   }
 }
 

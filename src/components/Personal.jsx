@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-", ",", "."].includes(e.key) && e.preventDefault();
 
-function Personal({ handleOnClick, onChange, form, show }) {
+function Personal({ handleOnClick, onChange, form }) {
   return (
     <div>
       <div className="form">
@@ -32,12 +32,12 @@ function Personal({ handleOnClick, onChange, form, show }) {
         </div>
         <div className="form-group">
           <TextField
-            name="fathername"
+            name="patronymic"
             type="text"
             label="Ata Adı *"
             variant="standard"
-            value={form.fathername}
             onChange={onChange}
+            value={form.patronymic}
           />
         </div>
         <div className="form-group">
@@ -52,11 +52,11 @@ function Personal({ handleOnClick, onChange, form, show }) {
         </div>
         <div className="form-group">
           <TextField
-            name="1ckod"
+            name="oneCCode"
             type="text"
             variant="standard"
             label="1C Kodu *"
-            value={form.code}
+            value={form.oneCCode}
             onChange={onChange}
           />
         </div>
@@ -66,8 +66,8 @@ function Personal({ handleOnClick, onChange, form, show }) {
           </InputLabel>
 
           <Select
-            name="idcard"
-            value={form.idcard}
+            name="identification"
+            value={form.identification}
             label="Vətəndaşlığı təsdiq edən sənəd"
             onChange={onChange}
             variant="standard"
@@ -82,45 +82,45 @@ function Personal({ handleOnClick, onChange, form, show }) {
         </FormControl>
         <div className="form-group">
           <TextField
-            name="passport"
+            name="idnumber"
             label="Şəxsiyyət vəsiqəsi nömrəsi *"
             variant="standard"
             type="text"
             onChange={onChange}
-            value={form.passport}
+            value={form.idnumber}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="birthplace"
+            name="birthPlace"
             type="text"
             label="Doğum yeri"
             variant="standard"
             onChange={onChange}
-            value={form.birthplace}
+            value={form.birthPlace}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="birthday"
+            name="birthDate"
             label="Doğum tarixi"
             type="date"
             defaultValue="2017-05-24"
             sx={{ width: 200 }}
             variant="standard"
             onChange={onChange}
-            value={form.birthday}
+            value={form.birthDate}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="fincode"
+            name="pincode"
             label="Fin Kodu *"
             variant="standard"
             sx={{ width: 250 }}
             type="text"
             onChange={onChange}
-            value={form.fincode}
+            value={form.pincode}
           />
         </div>
         <div className="form-group">
@@ -128,8 +128,8 @@ function Personal({ handleOnClick, onChange, form, show }) {
             <InputLabel id="demo-simple-select-label">Qan Qrupu </InputLabel>
 
             <Select
-              name="bloodgroup"
-              value={form.idcard}
+              name="bloodGroupId"
+              value={form.bloodGroupId}
               label="Qan Qrupu"
               onChange={onChange}
               variant="standard"
@@ -152,8 +152,8 @@ function Personal({ handleOnClick, onChange, form, show }) {
             </InputLabel>
 
             <Select
-              name="maritalstatus"
-              value={form.maritalstatus}
+              name="maritalStatus"
+              value={form.maritalStatus}
               label="Ailə Vəziyyəti"
               onChange={onChange}
               variant="standard"
@@ -192,23 +192,23 @@ function Personal({ handleOnClick, onChange, form, show }) {
         </div>
         <div className="form-group">
           <TextField
-            name="registerationaddress"
+            name="registrationAddress"
             variant="standard"
             label="Qeydiyyat ünvanı *"
             type="text"
             onChange={onChange}
             sx={{ width: "250px" }}
-            value={form.registerationaddress}
+            value={form.registrationAddress}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="address"
+            name="residenceAddress"
             variant="standard"
             label="Faktiki yaşadığı ünvan"
             type="text"
             onChange={onChange}
-            value={form.address}
+            value={form.residenceAddress}
           />
         </div>
         <div className="form-group">
@@ -218,8 +218,8 @@ function Personal({ handleOnClick, onChange, form, show }) {
             </InputLabel>
 
             <Select
-              name="docorganization"
-              value={form.docorganization}
+              name="idprovider"
+              value={form.idprovider}
               variant="standard"
               label="ŞV Verən Orqan"
               onChange={onChange}
@@ -232,25 +232,25 @@ function Personal({ handleOnClick, onChange, form, show }) {
         </div>
         <div className="form-group">
           <TextField
-            name="docstart"
+            name="idgivenDate"
             label="ŞV verilmə tarixi"
             type="date"
             defaultValue="2017-05-24"
             sx={{ width: 250 }}
             variant="standard"
             onChange={onChange}
-            value={form.docstart}
+            value={form.idgivenDate}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="docend"
+            name="idexpirationDate"
             type="date"
             label="ŞV bitmə tarixi"
             variant="standard"
             defaultValue="2017-05-24"
             onChange={onChange}
-            value={form.docend}
+            value={form.idexpirationDate}
           />
         </div>
         <div className="form-group">
@@ -260,10 +260,10 @@ function Personal({ handleOnClick, onChange, form, show }) {
             </InputLabel>
 
             <Select
-              name="militarystatus"
-              value={form.militarystatus}
+              name="militaryStatus"
+              value={form.militaryStatus}
               variant="standard"
-              label="ŞV Verən Orqan"
+              label="Hərbi mükəlləfiyyət"
               onChange={onChange}
             >
               <MenuItem value="H/M">H/M</MenuItem>
@@ -273,36 +273,36 @@ function Personal({ handleOnClick, onChange, form, show }) {
         </div>
         <div className="form-group">
           <TextField
-            name="dsmfcardnumber"
+            name="dsmfcardNumber"
             variant="standard"
             label="DSMF Kart nömrəsi"
             type="number"
             min="0"
             onChange={onChange}
-            value={form.dsmfcardnumber}
+            value={form.dsmfcardNumber}
             onKeyDown={blockInvalidChar}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="quotastatus"
+            name="quoteStatus"
             label="Kvota status"
             variant="standard"
             type="text"
             sx={{ width: "250px" }}
             onChange={onChange}
-            value={form.quotastatus}
+            value={form.quoteStatus}
           />
         </div>
         <div className="form-group">
           <TextField
-            name="graduation"
+            name="specialGraduationStatus"
             variant="standard"
             sx={{ width: "300px" }}
             label="Xüsusi məzuniyyət statusu"
             type="text"
             onChange={onChange}
-            value={form.graduation}
+            value={form.specialGraduationStatus}
           />
         </div>
       </div>
@@ -318,7 +318,7 @@ function Personal({ handleOnClick, onChange, form, show }) {
       >
         ƏLAVƏ ET
       </Button>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
