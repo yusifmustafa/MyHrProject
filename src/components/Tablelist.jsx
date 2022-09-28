@@ -1,5 +1,6 @@
 import "./Tablelist.css";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import Pagination from "./Pagination";
 import { FaPen, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -13,13 +14,13 @@ function Tablelist() {
   const [data, setData] = useState([]);
   const [searchTab, setSearchTab] = useState("");
 
+
   function getDataFromAPI() {
     API.get("/employees").then((rsp) => {
-        setData(rsp.data);
+      setData(rsp.data);
     });
-  } 
- 
- 
+  }
+
   // const uptData = () => {
   //   const empData = getDataFromLocalStorage();
   //   setData(empData);
@@ -133,8 +134,21 @@ function Tablelist() {
   // }
 
   function deleteItem(userId) {
-    API.delete(`/employees/${userId}`).then(() => {
-      getDataFromAPI();
+    Swal.fire({
+      title: "Silmək istədiyinizə əminsiniz?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      cancelButtonText:"Vazkeç",
+      confirmButtonText: "Sil!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        API.delete(`/employees/${userId}`).then(() => {
+          getDataFromAPI();
+        });
+        Swal.fire("İstifadəçi Silindi!");
+      }
     });
     // let data = getDataFromLocalStorage();
     // data = data.filter((item) => item.userId !== userId);

@@ -10,11 +10,16 @@ import { FaBackward } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import API from "../Api";
+import Swal from "sweetalert2";
 export const ADD_USER = "ADD_USER";
 
 function Adduser() {
   const notify = () => toast.error("Xəta! Xanalar boş buraxıla bilməz");
   const notify2 = () => toast.success("Əlavə edildi!");
+  const notify3 = () =>
+    toast.loading("Ana Səhifəyə yönləndirilir...", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   const navigate = useNavigate();
   const navigateToHomePage = () => {
     navigate("/");
@@ -41,11 +46,11 @@ function Adduser() {
       return;
     }
     if (action === ADD_USER) {
-      data.id = 0; 
+      data.id = 0;
 
-      if (userId !== undefined){
-        data.id = userId
-      } 
+      if (userId !== undefined) {
+        data.id = userId;
+      }
       setForm(data);
       upsertPerson(data.id);
       setTimeout(() => {
@@ -53,6 +58,7 @@ function Adduser() {
       }, 1500);
       notify2();
     }
+    notify3();
   };
   const [value, setValue] = useState("1");
   let { userId } = useParams();
@@ -115,12 +121,11 @@ function Adduser() {
   //   return data;
   // }
 
-  function upsertPerson(id) { 
+  function upsertPerson(id) {
     if (id !== 0) {
-      API.put(`/employees/${userId}`, form).then((rsp) => {});
-    }
-     else if (id === 0) { 
-      API.post(`/employees`, form).then((rsp) => {});
+      API.put(`/employees/${userId}`, form).then(() => {});
+    } else if (id === 0) {
+      API.post(`/employees`, form).then(() => {});
     }
   }
 
