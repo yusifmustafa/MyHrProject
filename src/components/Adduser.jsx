@@ -10,7 +10,6 @@ import { FaBackward } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import API from "../Api";
-import Swal from "sweetalert2";
 export const ADD_USER = "ADD_USER";
 
 function Adduser() {
@@ -160,6 +159,8 @@ function Adduser() {
       setForm(response);
     });
   }
+
+
   // const data = getDataFromLocalStorage();
   // (data ? data : []).forEach((item) => {
   //   if (parseInt(item.userId) === parseInt(userId)) {

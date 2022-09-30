@@ -14,7 +14,6 @@ function Tablelist() {
   const [data, setData] = useState([]);
   const [searchTab, setSearchTab] = useState("");
 
-
   function getDataFromAPI() {
     API.get("/employees").then((rsp) => {
       setData(rsp.data);
@@ -49,15 +48,15 @@ function Tablelist() {
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
-  console.log("crntemploees", currentEmployees);
   const totalPages = Math.ceil(data.length / employeesPerPage);
 
   return (
     <div className="tablelist">
-      <h3>İşçilərin siyahısı</h3> <br />
-      <Link to="/add-user" className="adduser">
-        Əlavə et
-      </Link>
+      <div className="header">
+        <h2 style={{ fontFamily: "Helvetica",fontWeight:"600"}}>İşçilərin Siyahısı</h2> <br />
+        <Link to="/add-user" className="adduser">
+          Əlavə et
+        </Link>
       <TextField
         type="search"
         name="search"
@@ -74,7 +73,8 @@ function Tablelist() {
         className="form-control"
         onChange={(e) => setSearchTab(e.target.value)}
         style={{ width: "150px", height: "40px" }}
-      />
+        />
+        </div>
       <table className="table table-striped">
         <thead>
           <tr className="user-about">
@@ -92,7 +92,6 @@ function Tablelist() {
             .filter((item) => item.name?.includes(searchTab))
 
             .map((item) => {
-              console.log("item", item);
               return (
                 <tr key={item.id}>
                   <td>{item.id}</td>
@@ -140,8 +139,8 @@ function Tablelist() {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      cancelButtonText:"Vazkeç",
-      confirmButtonText: "Sil!",
+      cancelButtonText: "Geri qayıt",
+      confirmButtonText: "Sil",
     }).then((result) => {
       if (result.isConfirmed) {
         API.delete(`/employees/${userId}`).then(() => {
