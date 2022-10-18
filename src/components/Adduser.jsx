@@ -103,7 +103,11 @@ function Adduser() {
             />
           </TabPanel>
           <TabPanel value="2">
-            <Department />
+            <Department
+              form={form}
+              onChange={onChange}
+              handleOnClick={handleOnClick}
+            />
           </TabPanel>
           <TabPanel value="3">
             <Education />
@@ -129,7 +133,7 @@ function Adduser() {
   }
 
   // let updateData = getDataFromLocalStorage();
-  // // form.userId = userId;
+   // form.userId = userId;
   // if (form.userId === 0) {
   //   form.userId = getMaxUserId();
   //   updateData.push(form);
@@ -159,7 +163,6 @@ function Adduser() {
       setForm(response);
     });
   }
-
 
   // const data = getDataFromLocalStorage();
   // (data ? data : []).forEach((item) => {

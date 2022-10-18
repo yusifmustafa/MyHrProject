@@ -1,10 +1,24 @@
 import { TextField } from "@mui/material";
 import React from "react";
 
-function Department() {
+export const ADD_POSITION = "ADD_POSITION";
+
+function Department({ form, onChange, handleOnClick }) {
+  handleOnClick = (e) => {
+    const { action, data } = e;
+    if (action === ADD_POSITION) {
+     
+    }
+  };
   return (
     <div>
-      <TextField label="Vəzifəsi" variant="standard" />
+      <TextField
+        name="position"
+        label="Vəzifəsi"
+        variant="standard"
+        onChange={onChange}
+        value={form.position}
+      />
     </div>
   );
 }

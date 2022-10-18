@@ -53,28 +53,31 @@ function Tablelist() {
   return (
     <div className="tablelist">
       <div className="header">
-        <h2 style={{ fontFamily: "Helvetica",fontWeight:"600"}}>İşçilərin Siyahısı</h2> <br />
+        <h2 style={{ fontFamily: "Helvetica", fontWeight: "600" }}>
+          İşçilərin Siyahısı
+        </h2>{" "}
+        <br />
         <Link to="/add-user" className="adduser">
           Əlavə et
         </Link>
-      <TextField
-        type="search"
-        name="search"
-        variant="standard"
-        label="Axtarış..."
-        sx={{ marginBottom: "2rem" }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start">
-              <FaSearch />
-            </InputAdornment>
-          ),
-        }}
-        className="form-control"
-        onChange={(e) => setSearchTab(e.target.value)}
-        style={{ width: "150px", height: "40px" }}
+        <TextField
+          type="search"
+          name="search"
+          variant="standard"
+          label="Axtarış..."
+          sx={{ marginBottom: "2rem" }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <FaSearch />
+              </InputAdornment>
+            ),
+          }}
+          className="form-control"
+          onChange={(e) => setSearchTab(e.target.value)}
+          style={{ width: "150px", height: "40px" }}
         />
-        </div>
+      </div>
       <table className="table table-striped">
         <thead>
           <tr className="user-about">
