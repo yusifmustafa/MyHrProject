@@ -21,7 +21,7 @@ function Adduser() {
     });
   const navigate = useNavigate();
   const navigateToHomePage = () => {
-    navigate("/");
+    navigate("/tablelist");
   };
 
   const [form, setForm] = useState({});
@@ -75,7 +75,7 @@ function Adduser() {
       <div className="navbar">
         <h4>İşçilər</h4>
         <h4 className="backIcon">
-          <Link className="goToHomePage" to="/">
+          <Link className="goToHomePage" to="/tablelist">
             <FaBackward />
           </Link>
         </h4>

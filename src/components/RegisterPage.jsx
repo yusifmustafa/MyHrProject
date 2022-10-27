@@ -60,7 +60,17 @@ export default function RegisterPage() {
       notify();
       return;
     }
-    console.log("ksdkdks");
+    const localStorageData = JSON.parse(localStorage.getItem("formData"));
+
+    const formData = localStorageData ? localStorageData : [];
+
+    formData.push({
+      firstName: registerForm.firstName,
+      lastName: registerForm.lastName,
+      email: registerForm.email,
+      password: registerForm.password,
+    });
+    localStorage.setItem("formData", JSON.stringify(formData));
   };
 
   const handleOnChange = (e) => {
@@ -161,9 +171,9 @@ export default function RegisterPage() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
       <ToastContainer />
+      <Copyright sx={{ mt: 47.1, background: "#04517D", color: "#fff" }} />
     </ThemeProvider>
   );
 }

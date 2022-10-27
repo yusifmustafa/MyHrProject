@@ -8,10 +8,13 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="/tablelist" element={<Tablelist />} />
-      <Route path="/add-user" element={<Adduser />} />
-      <Route path="/edit-user/:userId" element={<Adduser />} />
       <Route path="/register" element={<RegisterPage />} />
+
+      <>
+        <Route path="/tablelist" element={<Tablelist />} />
+        <Route path="/add-user" element={<Adduser />} />
+        <Route path="/edit-user/:userId" element={<Adduser />} />
+      </>
     </Routes>
   );
 }

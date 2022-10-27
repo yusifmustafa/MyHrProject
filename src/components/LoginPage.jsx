@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -32,7 +33,11 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function LoginPage({ setLogged }) {
+  const navigate = useNavigate();
+  const navigateToTableList = () => {
+    navigate("/tablelist");
+  };
   const notify = () =>
     toast.error("Email və ya Şifrə doğru deyil", {
       position: toast.POSITION.TOP_CENTER,
@@ -58,6 +63,17 @@ export default function SignIn() {
       notify();
       return;
     }
+    const localStorageDatas = JSON.parse(localStorage.getItem("formData"));
+    const datas = localStorageDatas.find(
+      (item) =>
+        item.email === loginForm.email && item.password === loginForm.password
+    );
+    if (datas) {
+      navigateToTableList();
+    } else {
+      return;
+    }
+    setLogged(true);
   };
 
   const handleOnChange = (e) => {
@@ -130,9 +146,9 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
       <ToastContainer />
+      <Copyright sx={{ mt: 54.1, background: "#04517D", color: "#fff" }} />
     </ThemeProvider>
   );
 }
